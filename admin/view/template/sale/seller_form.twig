@@ -1,0 +1,892 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-customer" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid"> {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{  heading_title }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-customer" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+           
+            <li><a href="#tab-history" data-toggle="tab">{{ tab_payment_details }}</a></li>
+           
+          </ul>
+          <div class="tab-content">
+          <div class="tab-pane active" id="tab-general">
+            <div class="row">
+              <div class="col-sm-2">
+                <ul class="nav nav-pills nav-stacked" id="address">
+                  <li class="active"><a href="#tab-customer" data-toggle="tab">{{ tab_general }}</a></li>
+                  {% set address_row = 1 %}
+                  <li><a href="#tab-address{{ address_row }}" data-toggle="tab">{{ tab_address }} {{ address_row }}</a></li>
+                 
+                </ul>
+              </div>
+              <div class="col-sm-10">
+                <div class="tab-content">
+                  
+		  <div class="tab-pane active" id="tab-customer">
+                    <fieldset>
+                      <legend>{{ text_account }}</legend>
+                     <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-firstname">{{ entry_username }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="username" value="{{ username }}" placeholder="{{ entry_username }}" id="input-username" class="form-control" />
+                          {% if error_username12 %}
+                          <div class="text-danger">{{ error_username12 }}</div>
+                          {% endif %}</div>
+                      </div>
+
+                      <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-firstname">{{ entry_firstname }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" class="form-control" />
+                          {% if error_firstname %}
+                          <div class="text-danger">{{ error_firstname }}</div>
+                          {% endif %}</div>
+                      </div>
+                      <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-lastname">{{ entry_lastname }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" class="form-control" />
+                          {% if error_lastname %}
+                          <div class="text-danger">{{ error_lastname }}</div>
+                          {% endif %}</div>
+                      </div>
+                      <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
+                          {% if error_email %}
+                          <div class="text-danger">{{ error_email }}</div>
+                          {% endif %}</div>
+                      </div>
+                    
+                      
+                    
+                      <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-password">{{ entry_password }}</label>
+                        <div class="col-sm-10">
+                          <input type="password" name="password" value="{{ password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" autocomplete="off" />
+                          {% if error_password %}
+                          <div class="text-danger">{{ error_password }}</div>
+                          {% endif %}</div>
+                      </div> 
+
+		        <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone }}</label>
+                        <div class="col-sm-10">
+                          <input type="text" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control" />
+                          {% if error_telephone %}
+                          <div class="text-danger">{{ error_telephone }}</div>
+                          {% endif %}</div>
+                      </div>
+		      
+
+		      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-tin_no">Tin No/Vat no.</label>
+                        <div class="col-sm-10">
+                         <input type="text" name="tin_no" placeholder="tin_no" value="{{ tin_no }}" class="form-control"/>
+                  
+                        </div>
+                      </div>	  
+
+                    <div class="form-group" style="display:none">
+                        <label class="col-sm-2 control-label" for="input-fax">{{ entry_fax }} </label>
+                        <div class="col-sm-10">
+                          <input type="text" name="fax" value="{{ fax }} " placeholder="{{ entry_fax }} " id="input-fax" class="form-control" />
+                        </div>
+                      </div>
+
+
+                      <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                        <div class="col-sm-10">
+                          <select name="status" id="input-status" class="form-control">
+                            
+                            
+                            
+                            
+                            
+                {% if status %}
+                
+                            
+                            
+                            
+                            
+                            <option value="1" selected="selected">{{ text_enabled }}</option>
+                            <option value="0">{{ text_disabled }}</option>
+                            
+                            
+                            
+                            
+                            
+                {% else %}
+                
+                            
+                            
+                            
+                            
+                            <option value="1">{{ text_enabled }}</option>
+                            <option value="0" selected="selected">{{ text_disabled }}</option>
+                            
+                            
+                            
+                            
+                            
+                {% endif %}
+              
+                          
+                          
+                          
+                          
+                          </select>
+                        </div>
+                      </div>
+                      
+		      <div class="form-group required">
+                        <label class="col-sm-2 control-label" for="input-comm">{{ entry_commission }}</label>
+                        <div class="col-sm-10">
+				<select name="commission_id" id="input-comm" class="form-control">
+				<option value="">{{ text_select }}</option>
+
+				{% for commission in commissions %}
+
+				{% if commission.commission_id == commission_id %}
+
+				
+				<option selected value="{{ commission.commission_id }}">{{ commission.commission_name }}</option>
+
+				 {% else %}
+
+				 <option  value="{{ commission.commission_id }}">{{ commission.commission_name }}</option>
+
+
+				 {% endif %}
+
+
+				
+				{% endfor %}
+				</select>
+                        </div>
+                      </div>
+
+		      {% if seller_id > 0 %}
+					  <div class="form-group">
+                        <label class="col-sm-2 control-label" for="input-image">{{ entry_image }}</label>
+                        <div class="col-sm-10">       
+								<div id="option-1" class="option">
+								<img src="{{ thumb }}" alt="" id="thumb" width="100" height="100"/><br/>
+								<a id="image" class="btn btn-primary">Upload</a>
+								<input type="hidden" name="image"  value="{{ image }}"  />
+								<div id="option-2"></div>
+								</div>
+                        </div>
+                      </div>
+<script type="text/javascript" src="view/javascript/jquery/ajaxupload.js"></script>
+<script type="text/javascript"><!--
+					new AjaxUpload('#image', {
+					action: 'index.php?route=sale/seller/upload&user_token={{ user_token }}&seller_id=' + {{ seller_id }},
+					name: 'file',
+					autoSubmit: true,
+					responseType: 'json',
+					onSubmit: function(file, extension) {
+					$('#image').after('<img src="view/image/loading.gif" class="loading" style="padding-left: 5px;" />');
+					},
+					onComplete: function(file, json) {
+					$('.error').remove();
+
+					if (json.success) {
+					alert(json.success);			
+					$("input[name='image']").attr('value', json.foldername+json.file);
+					$('#thumb').attr('src','../image/'+json.foldername+json.file);
+					}
+
+					if (json.error) {
+					$('#option-2').html('<span class="text-danger">' + json.error + '</span>');
+					}
+
+					$('.loading').remove();	
+					}
+					});
+					//--></script>
+
+					   {% endif %}
+
+
+					<div class="form-group">
+					<label class="col-sm-2 control-label" for="input-status">{{ entry_aboutus }}</label>
+					<div class="col-sm-10">
+					<textarea name="aboutus" id="aboutus">{{ aboutus }}</textarea>
+
+
+					</div>
+					</div>
+
+                    </fieldset>
+                  </div>
+
+
+                  {% set address_row = 1 %}
+                  
+		 
+                  <div class="tab-pane" id="tab-address{{ address_row }}">
+                    <input type="hidden" name="address[{{ address_row }}][address_id]" value="{{ addresses.address_id }}" />
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-firstname{{ address_row }}">{{ entry_firstname }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][firstname]" value="{{ addresses.firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname{{ address_row }}" class="form-control" />
+                        {% if error_address[address_row].firstname %}
+                        <div class="text-danger">{{ error_address[address_row].firstname }}</div>
+                        {% endif %}</div>
+                    </div>
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-lastname{{ address_row }}">{{ entry_lastname }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][lastname]" value="{{ addresses.lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname{{ address_row }}" class="form-control" />
+                        {% if error_address[address_row].lastname %}
+                        <div class="text-danger">{{ error_address[address_row].lastname }}</div>
+                        {% endif %}</div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="input-company{{ address_row }}">{{ entry_company }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][company]" value="{{ addresses.company }}" placeholder="{{ entry_company }}" id="input-company{{ address_row }}" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-address-1{{ address_row }}">{{ entry_address_1 }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][address_1]" value="{{ addresses.address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1{{ address_row }}" class="form-control" />
+                        {% if error_address[address_row].address_1 %}
+                        <div class="text-danger">{{ error_address[address_row].address_1 }}</div>
+                        {% endif %}</div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label" for="input-address-2{{ address_row }}">{{ entry_address_2 }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][address_2]" value="{{ addresses.address_2 }}" placeholder="{{ entry_address_2 }}" id="input-address-2{{ address_row }}" class="form-control" />
+                      </div>
+                    </div>
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-city{{ address_row }}">{{ entry_city }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][city]" value="{{ addresses.city }}" placeholder="{{ entry_city }}" id="input-city{{ address_row }}" class="form-control" />
+                        {% if error_address[address_row].city %}
+                        <div class="text-danger">{{ error_address[address_row].city }}</div>
+                        {% endif %}</div>
+                    </div>
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-postcode{{ address_row }}">{{ entry_postcode }}</label>
+                      <div class="col-sm-10">
+                        <input type="text" name="address[{{ address_row }}][postcode]" value="{{ addresses.postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode{{ address_row }}" class="form-control" />
+                        {% if error_address[address_row].postcode %}
+                        <div class="text-danger">{{ error_address[address_row].postcode }}</div>
+                        {% endif %}</div>
+                    </div>
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-country{{ address_row }}">{{ entry_country }}</label>
+                      <div class="col-sm-10">
+                        <select name="address[{{ address_row }}][country_id]" id="input-country{{ address_row }}" onchange="country(this, '{{ address_row }}', '{{ addresses.zone_id }}');" class="form-control">
+                          <option value="">{{ text_select }}</option>
+                          
+                          
+                          
+                          
+                          
+                  
+                  
+                  
+                  
+                  
+                  
+                            
+                            
+                            
+                            
+                            
+                            
+                            {% for country in countries %}
+                            {% if country.country_id == addresses.country_id %}
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                  
+                  
+                  
+                  
+                  
+                  
+                          
+                          
+                          
+                          
+                          <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                          
+                          
+                          
+                          
+                          
+                  
+                  
+                  
+                  
+                  
+                  
+                            
+                            
+                            
+                            
+                            
+                            
+                            {% else %}
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                  
+                  
+                  
+                  
+                  
+                  
+                          
+                          
+                          
+                          
+                          <option value="{{ country.country_id }}">{{ country.name }}</option>
+                          
+                          
+                          
+                          
+                          
+                  
+                  
+                  
+                  
+                  
+                  
+                            
+                            
+                            
+                            
+                            
+                            
+                            {% endif %}
+                            {% endfor %}
+                          
+                          
+                          
+                          
+                          
+                          
+                          
+                
+                
+                
+                
+                
+                
+                        
+                        
+                        
+                        
+                        </select>
+                        {% if error_address[address_row].country %}
+                        <div class="text-danger">{{ error_address[address_row].country }}</div>
+                        {% endif %}</div>
+                    </div>
+                    <div class="form-group required">
+                      <label class="col-sm-2 control-label" for="input-zone{{ address_row }}">{{ entry_zone }}</label>
+                      <div class="col-sm-10">
+                        <select name="address[{{ address_row }}][zone_id]" id="input-zone{{ address_row }}" class="form-control">
+                        </select>
+                        {% if error_address[address_row].zone %}
+                        <div class="text-danger">{{ error_address[address_row].zone }}</div>
+                        {% endif %}</div>
+                    </div>
+                   
+                    <div class="form-group" style="display:none">
+                      <label class="col-sm-2 control-label">{{ entry_default }}</label>
+                      <div class="col-sm-10">
+                        <label class="radio">{% if addresses.address_id == address_id or not addresses %}
+                          <input type="radio" name="address[{{ address_row }}][default]" value="{{ address_row }}" checked="checked" />
+                          {% else %}
+                          <input type="radio" name="address[{{ address_row }}][default]" value="{{ address_row }}" checked="checked" />
+                          {% endif %}</label>
+                      </div>
+                    </div>
+
+		    
+                   
+                    </div>
+                </div>
+              </div>
+            </div>
+	    </div>
+          
+          <div class="tab-pane" id="tab-history">
+          
+            
+            <div class="form-group">
+					<label class="col-sm-2 control-label" for="input-comment"></label>
+					 <div class="col-sm-10">
+              {% if  paypalorcheque == 1 %}
+            <input type="radio" name="paypalorcheque" value="1" checked="checked" />
+            Paypal
+            <input type="radio" name="paypalorcheque" value="0" />
+            Cheque
+	    <input type="radio" name="paypalorcheque" value="2" />
+            Bank Transfer
+            {% elseif  paypalorcheque == 0 %}
+            <input type="radio" name="paypalorcheque" value="1" />
+            Paypal
+            <input type="radio" name="paypalorcheque" value="0" checked="checked" />
+            Cheque
+	    <input type="radio" name="paypalorcheque" value="2" />
+            Bank Transfer
+            {% else %}
+            <input type="radio" name="paypalorcheque" value="1" />
+            Paypal
+            <input type="radio" name="paypalorcheque" value="0" />
+            Cheque
+	    <input type="radio" name="paypalorcheque" value="2" checked="checked" />
+            Bank Transfer
+             {% endif %}
+			
+            </div>
+			
+			
+			
+					</div>
+					
+					
+					 <div class="form-group required" id="paypal-tr">
+            <label class="col-sm-2 control-label" for="input-paypal">{{ entry_paypalemail }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="paypal_email" value="{{ paypal_email }}" placeholder="{{ entry_paypalemail }}" 
+			  id="input-paypal" class="form-control" />
+              {% if error_paypalemail %}
+              <div class="text-danger">{{ error_paypalemail }}</div>
+               {% endif %}
+            </div>
+          </div>
+		  
+		  
+		   <div class="form-group required" id="bankname-tr">
+            <label class="col-sm-2 control-label" for="input-bank">{{ entry_bankname }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="bank_name" value="{{ bank_name }}" placeholder="{{ entry_bankname }}" 
+			  id="input-bank" class="form-control" />
+               {% if error_bankname %}
+              <div class="text-danger">{{ error_bankname }}</div>
+               {% endif %}
+            </div>
+          </div>
+		  
+		  
+		   <div class="form-group required" id="accountnumber-tr">
+            <label class="col-sm-2 control-label" for="input-accountnumber">{{ entry_accountnumber }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="account_number" value="{{ account_number }}" placeholder="{{ entry_accountnumber }}" 
+			  id="input-accountnumber" class="form-control" />
+               {% if error_accountnumber %}
+              <div class="text-danger">{{ error_accountnumber }}</div>
+               {% endif %}
+            </div>
+          </div>
+		  
+		  
+		   <div class="form-group required" id="accountname-tr">
+            <label class="col-sm-2 control-label" for="input-accountname">{{ entry_accountname }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="account_name" value="{{ account_name }}" placeholder="{{ entry_accountname }}" 
+			  id="input-accountname" class="form-control" />
+               {% if error_accountname %}
+              <div class="text-danger">{{ error_accountname }}</div>
+               {% endif %}
+            </div>
+          </div>
+		  
+		  <div class="form-group required" id="branch-tr">
+            <label class="col-sm-2 control-label" for="input-branch">{{ entry_branch }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="branch" value="{{ branch }}" placeholder="{{ entry_branch }}" 
+			  id="input-branch" class="form-control" />
+               {% if error_branch %}
+              <div class="text-danger">{{ error_branch }}</div>
+               {% endif %}
+            </div>
+          </div>
+		  
+		  
+		   <div class="form-group required" id="ifsccode-tr">
+            <label class="col-sm-2 control-label" for="input-ifsccode">{{ entry_ifsccode }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="ifsccode" value="{{ ifsccode }}" placeholder="{{ entry_ifsccode }}" 
+			  id="input-ifsccode" class="form-control" />
+               {% if error_ifsccode %}
+              <div class="text-danger">{{ error_ifsccode }}</div>
+               {% endif %}
+            </div>
+          </div>
+		  
+		  
+		 
+		 
+		   <div class="form-group required" id="cheque-tr">
+            <label class="col-sm-2 control-label" for="input-cheque">{{ entry_cheque }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="cheque" value="{{ cheque }}" placeholder="{{ entry_cheque }}" 
+			  id="input-cheque" class="form-control" />
+               {% if error_cheque %}
+              <div class="text-danger">{{ error_cheque }}</div>
+               {% endif %}
+            </div>
+          </div>
+            
+          </div>
+          
+         
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script> 
+
+  
+   <script type="text/javascript"><!--
+
+$('#aboutus').summernote({height: 300});
+
+//--></script>
+  <script type="text/javascript"><!--
+
+$('input[name=\'paypalorcheque\']').on('change', function() {
+	var value = $(this).val();
+	if(value == 1){
+		$('#paypal-tr').show();
+		$('#cheque-tr').hide();
+		$('#bankname-tr').hide();
+		$('#accountnumber-tr').hide();
+		$('#accountname-tr').hide();
+		$('#branch-tr').hide();
+		$('#ifsccode-tr').hide();
+	}else if(value == 2){
+		$('#paypal-tr').hide();
+		$('#cheque-tr').hide();
+		$('#bankname-tr').show();
+		$('#accountnumber-tr').show();
+		$('#accountname-tr').show();
+		$('#branch-tr').show();
+		$('#ifsccode-tr').show();
+	}
+	else{
+		$('#paypal-tr').hide();
+		$('#cheque-tr').show();
+		$('#bankname-tr').hide();
+		$('#accountnumber-tr').hide();
+		$('#accountname-tr').hide();
+		$('#branch-tr').hide();
+		$('#ifsccode-tr').hide();
+	}
+});
+
+$('input[name=\'paypalorcheque\']:checked').trigger('change');
+//--></script>
+
+  
+  <script type="text/javascript"><!--
+var address_row = {{ address_row }};
+
+function addAddress() {
+	html  = '<div class="tab-pane" id="tab-address' + address_row + '">';
+	html += '  <input type="hidden" name="address[' + address_row + '][address_id]" value="" />';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-firstname' + address_row + '">{{ entry_firstname }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][firstname]" value="" placeholder="{{ entry_firstname }}" id="input-firstname' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-lastname' + address_row + '">{{ entry_lastname }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][lastname]" value="" placeholder="{{ entry_lastname }}" id="input-lastname' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group">';
+	html += '    <label class="col-sm-2 control-label" for="input-company' + address_row + '">{{ entry_company }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][company]" value="" placeholder="{{ entry_company }}" id="input-company' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-address-1' + address_row + '">{{ entry_address_1 }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][address_1]" value="" placeholder="{{ entry_address_1 }}" id="input-address-1' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group">';
+	html += '    <label class="col-sm-2 control-label" for="input-address-2' + address_row + '">{{ entry_address_2 }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][address_2]" value="" placeholder="{{ entry_address_2 }}" id="input-address-2' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-city' + address_row + '">{{ entry_city }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][city]" value="" placeholder="{{ entry_city }}" id="input-city' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-postcode' + address_row + '">{{ entry_postcode }}</label>';
+	html += '    <div class="col-sm-10"><input type="text" name="address[' + address_row + '][postcode]" value="" placeholder="{{ entry_postcode }}" id="input-postcode' + address_row + '" class="form-control" /></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-country' + address_row + '">{{ entry_country }}</label>';
+	html += '    <div class="col-sm-10"><select name="address[' + address_row + '][country_id]" id="input-country' + address_row + '" onchange="country(this, \'' + address_row + '\', \'0\');" class="form-control">';
+    html += '         <option value="">{{ text_select }}</option>';
+    {% for country in countries %}
+    html += '         <option value="{{ country.country_id }}">{{ country.name|escape('js') }}</option>';
+    {% endfor %}
+    html += '      </select></div>';
+	html += '  </div>';
+
+	html += '  <div class="form-group required">';
+	html += '    <label class="col-sm-2 control-label" for="input-zone' + address_row + '">{{ entry_zone }}</label>';
+	html += '    <div class="col-sm-10"><select name="address[' + address_row + '][zone_id]" id="input-zone' + address_row + '" class="form-control"><option value="">{{ text_none }}</option></select></div>';
+	html += '  </div>';
+
+	// Custom Fields
+	{% for custom_field in custom_fields %}
+	{% if custom_field.location == 'address' %}
+	{% if custom_field.type == 'select' %}
+
+	html += '  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '  		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field.name|e('js') }}</label>';
+	html += '  		<div class="col-sm-10">';
+	html += '  		  <select name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control">';
+	html += '  			<option value="">{{ text_select }}</option>';
+
+	{% for custom_field_value in custom_field.custom_field_value %}
+	html += '  			<option value="{{ custom_field_value.custom_field_value_id }}">{{ custom_field.name|e('js') }}</option>';
+	{% endfor %}
+
+	html += '  		  </select>';
+	html += '  		</div>';
+	html += '  	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'radio' %}
+	html += '  	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}">';
+	html += '  		<label class="col-sm-2 control-label">{{ custom_field.name|e('js') }}</label>';
+	html += '  		<div class="col-sm-10">';
+	html += '  		  <div>';
+
+	{% for custom_field_value in custom_field.custom_field_value %}
+	html += '  			<div class="radio"><label><input type="radio" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field_value.custom_field_value_id }}" /> {{ custom_field_value.name|e('js') }}</label></div>';
+	{% endfor %}
+
+	html += '		  </div>';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'checkbox' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label">{{ custom_field.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <div>';
+
+	{% for custom_field_value in custom_field.custom_field_value %}
+	html += '			<div class="checkbox"><label><input type="checkbox" name="address[{{ address_row }}][custom_field][{{ custom_field.custom_field_id }}][]" value="{{ custom_field_value.custom_field_value_id }}" /> {{ custom_field_value.name|e('js') }}</label></div>';
+	{% endfor %}
+
+	html += '		  </div>';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'text' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field_value.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field_value.name|e('js') }}" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" />';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'textarea' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field_value.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <textarea name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" rows="5" placeholder="{{ custom_field_value.name|e('js') }}" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control">{{ custom_field.value|e('js') }}</textarea>';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'file' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label">{{ custom_field.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <button type="button" id="button-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" data-loading-text="{{ text_loading }}" class="btn btn-default"><i class="fa fa-upload"></i> {{ button_upload }}</button>';
+	html += '		  <input type="hidden" name="address[' + address_row + '][{{ custom_field.custom_field_id }}]" value="" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" />';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'date' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field_value.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <div class="input-group date"><input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }} data-date-format="YYYY-MM-DD" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'time' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field_value.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <div class="input-group time"><input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }}" data-date-format="HH:mm" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% if custom_field.type == 'datetime' %}
+	html += '	  <div class="form-group custom-field custom-field{{ custom_field.custom_field_id }}" data-sort="{{ custom_field.sort_order + 1 }}">';
+	html += '		<label class="col-sm-2 control-label" for="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}">{{ custom_field_value.name|e('js') }}</label>';
+	html += '		<div class="col-sm-10">';
+	html += '		  <div class="input-group datetime"><input type="text" name="address[' + address_row + '][custom_field][{{ custom_field.custom_field_id }}]" value="{{ custom_field.value|e('js') }}" placeholder="{{ custom_field.name|e('js') }}" data-date-format="YYYY-MM-DD HH:mm" id="input-address' + address_row + '-custom-field{{ custom_field.custom_field_id }}" class="form-control" /><span class="input-group-btn"><button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button></span></div>';
+	html += '		</div>';
+	html += '	  </div>';
+	{% endif %}
+
+	{% endif %}
+	{% endfor %}
+
+	html += '  <div class="form-group">';
+	html += '    <label class="col-sm-2 control-label">{{ entry_default }}</label>';
+	html += '    <div class="col-sm-10"><label class="radio"><input type="radio" name="address[' + address_row + '][default]" value="1" /></label></div>';
+	html += '  </div>';
+
+    html += '</div>';
+
+	$('#tab-general .tab-content').append(html);
+
+	$('select[name=\'customer_group_id\']').trigger('change');
+
+	$('select[name=\'address[' + address_row + '][country_id]\']').trigger('change');
+
+	$('#address-add').before('<li><a href="#tab-address' + address_row + '" data-toggle="tab">{{ tab_address }} ' + address_row + '</a></li>');
+
+	$('#address a[href=\'#tab-address' + address_row + '\']').tab('show');
+
+	$('.date').datetimepicker({
+		language: document.cookie.match(new RegExp('language=([^;]+)'))[1],
+		pickTime: false
+	});
+
+	$('.datetime').datetimepicker({
+		language: document.cookie.match(new RegExp('language=([^;]+)'))[1],
+		pickDate: true,
+		pickTime: true
+	});
+
+	$('.time').datetimepicker({
+		language: document.cookie.match(new RegExp('language=([^;]+)'))[1],
+		pickDate: false
+	});
+
+	$('#tab-address' + address_row + ' .form-group[data-sort]').detach().each(function() {
+		if ($(this).attr('data-sort') >= 0 && $(this).attr('data-sort') <= $('#tab-address' + address_row + ' .form-group').length) {
+			$('#tab-address' + address_row + ' .form-group').eq($(this).attr('data-sort')).before(this);
+		}
+
+		if ($(this).attr('data-sort') > $('#tab-address' + address_row + ' .form-group').length) {
+			$('#tab-address' + address_row + ' .form-group:last').after(this);
+		}
+
+		if ($(this).attr('data-sort') < -$('#tab-address' + address_row + ' .form-group').length) {
+			$('#tab-address' + address_row + ' .form-group:first').before(this);
+		}
+	});
+
+	address_row++;
+}
+//--></script> 
+  <script type="text/javascript"><!--
+function country(element, index, zone_id) {
+	$.ajax({
+		url: 'index.php?route=localisation/country/country&user_token={{ user_token }}&country_id=' + element.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'address[' + index + '][country_id]\']').prop('disabled', true);
+		},
+		complete: function() {
+			$('select[name=\'address[' + index + '][country_id]\']').prop('disabled', false);
+		},
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('input[name=\'address[' + index + '][postcode]\']').parent().parent().addClass('required');
+			} else {
+				$('input[name=\'address[' + index + '][postcode]\']').parent().parent().removeClass('required');
+			}
+
+			html = '<option value="">{{ text_select }}</option>';
+
+			if (json['zone'] && json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+					html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+					if (json['zone'][i]['zone_id'] == zone_id) {
+						html += ' selected="selected"';
+					}
+
+					html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0">{{ text_none }}</option>';
+			}
+
+			$('select[name=\'address[' + index + '][zone_id]\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+}
+
+$('select[name$=\'[country_id]\']').trigger('change');
+//--></script> 
+ 
+ 
+ 
+</div>
+{{ footer }} 

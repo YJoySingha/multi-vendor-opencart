@@ -1,0 +1,404 @@
+{{ header }}{{ column_left }}
+<div id="content">
+    <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-page-builder" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{ heading_title }}</h1>
+            <ul class="breadcrumb">
+                {% for breadcrumb in breadcrumbs %}
+                    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-pencil"></i>{{ text_edit }}</h3>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-page-builder" class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                        {% if error_name %}
+                            <div class="text-danger">{{ error_name }}</div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                    <div class="col-sm-10">
+                        <select name="status" id="input-status" class="form-control">
+                            {% if status %}
+                                <option value="1" selected="selected">{{ text_enabled }}</option>
+                                <option value="0">{{ text_disabled }}</option>
+                            {% else %}
+                                <option value="1">{{ text_enabled }}</option>
+                                <option value="0" selected="selected">{{ text_disabled }}</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="widget-container col-sm-12">
+                        {% if widgets %}
+                            {% set widget_row = 0 %}
+                            {% for main_row in widgets %}
+                                {% set cols_format, main_col_count = "", 0 %}
+                                {% for main_col in main_row.main_cols %}
+                                    {% set main_col_count = main_col_count + 1 %}
+                                    {% if main_col == main_row.main_cols|last %}
+                                        {% set cols_format = cols_format ~ main_col.format %}
+                                    {% else %}
+                                        {% set cols_format = cols_format ~ main_col.format ~ ' + ' %}
+                                    {% endif %}
+                                {% endfor %}
+                                <div class="widget-row col-sm-12">
+                                    <div class="row-action">
+                                        <div class="action-group">
+                                            <input type="text" class="form-control input-class-name" name="widget[{{ widget_row }}][class]" value="{{ main_row.class }}" placeholder="{{ text_custom_classname }}" />
+                                            <span class="row-identify">{{ text_columns }}</span>
+                                            <div class="col-count">
+                                                <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
+                                                <span class="count">{{ main_col_count }}</span>
+                                                <a href="javascript:void(0);" onclick="builder.minusMainColumn($(this));" rel="1" class="col-minus"></a>
+                                            </div>
+                                            <div class="a-group">
+                                                <a class="a-column-custom" title="{{ text_custom_columns }}" onclick="builder.customMainColumns($(this));" href="javascript:void(0);"></a>
+                                                <a class="a-row-delete" onclick="builder.removeRow($(this));" href="javascript:void(0);"></a>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" class="cols-format" value="{{ cols_format }}" />
+                                    </div>
+                                    <div class="row-content row-{{ widget_row }}">
+                                        {% set main_col_count = 0 %}
+                                        {% for main_col in main_row.main_cols %}
+                                            <div class="col-sm-{{ main_col.format }} main-column">
+                                                <input type="hidden" class="main-col-pos" value="{{ main_col_count }}" />
+                                                <input type="hidden" class="main-col-format" name="widget[{{ widget_row }}][main_cols][{{ main_col_count }}][format]" value="{{ main_col.format }}" />
+                                                <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">{{ text_add_sub_row }}</a>
+                                                <div class="main-col-content main-col-{{ main_col_count }}">
+                                                    {% set widget_sub_row = 0 %}
+                                                    {% if main_col.sub_rows %}
+                                                        {% for sub_row in main_col.sub_rows %}
+                                                            {% set sub_cols_format, sub_col_count = "", 0 %}
+                                                            {% for sub_col in sub_row.sub_cols %}
+                                                                {% set sub_col_count = sub_col_count + 1 %}
+                                                                {% if sub_col == sub_row.sub_cols|last %}
+                                                                    {% set sub_cols_format = sub_cols_format ~ sub_col.format %}
+                                                                {% else %}
+                                                                    {% set sub_cols_format = sub_cols_format ~ sub_col.format ~ ' + '%}
+                                                                {% endif %}
+                                                            {% endfor %}
+                                                            <div class="sub-row sub-row-{{ widget_sub_row }}">
+                                                                <div class="sub-row-action">
+                                                                    <div class="action-group">
+                                                                        <span class="row-identify">{{ text_columns }}</span>
+                                                                        <div class="sub-col-count">
+                                                                            <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>
+                                                                            <span class="count">{{ sub_col_count }}</span>
+                                                                            <a href="javascript:void(0);" onclick="builder.minusSubColumn($(this))" rel="1" class="col-minus"></a>
+                                                                        </div>
+                                                                        <div class="a-group">
+                                                                            <a class="a-column-custom" title="{{ text_custom_columns }}" onclick="builder.customSubColumns($(this))" href="javascript:void(0);"></a>
+                                                                            <a class="a-row-delete" onclick="builder.removeSubRow($(this))" href="javascript:void(0);"></a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" class="sub-cols-format" value="{{ sub_cols_format }}" />
+                                                                </div>
+                                                                <div class="sub-row-content">
+                                                                    {% set sub_col_count = 0 %}
+                                                                    {% for sub_col in sub_row.sub_cols %}
+                                                                        <div class="col-sm-{{ sub_col.format }} column-area">
+                                                                            <div class="module-area droparea ui-droppable ui-sortable sub-col-{{ sub_col_count }}">
+                                                                                <div class="text-insert-module"><span class="">{{ text_insert_module }}</span></div>
+                                                                                {% if sub_col.info %}
+                                                                                    {% for modules in sub_col.info %}
+                                                                                        {% set position = 0 %}
+                                                                                        {% for module in modules %}
+                                                                                            {% set module_name = '' %}
+                                                                                            {% set module_url = '' %}
+                                                                                            {% for extension in extensions %}
+                                                                                                {% if not extension.modules and (extension.code == module.code) %}
+                                                                                                    {% set module_url = extension.url %}
+                                                                                                    {% set module_name = extension.name %}
+                                                                                                {% else %}
+                                                                                                    {% for m in extension.modules %}
+                                                                                                        {% if m.code == module.code %}
+                                                                                                            {% set module_url = m.url %}
+                                                                                                            {% set module_name = m.name %}
+                                                                                                        {% endif %}
+                                                                                                    {% endfor %}
+                                                                                                {% endif %}
+                                                                                            {% endfor %}
+                                                                                            <div class="layout-module-info moveable">
+                                                                                                <div class="top">
+                                                                                                    <div class="module-info">
+                                                                                                        <p>{{ module_name }}</p>
+                                                                                                        <a class="btn-edit" href="javascript:void(0);" onclick="loadModule('{{ module_url }}')"></a>
+                                                                                                        <a class="btn-remove" href="javascript:void(0);" onclick="builder.removeModule($(this))"></a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <input type="hidden" class="module-in-main-row" value="{{ widget_row }}" />
+                                                                                                <input type="hidden" class="module-in-main-col" value="{{ main_col_count }}" />
+                                                                                                <input type="hidden" class="module-in-sub-row" value="{{ widget_sub_row }}" />
+                                                                                                <input type="hidden" class="module-in-sub-col" value="{{ sub_col_count }}" />
+                                                                                                <input type="hidden" class="module-code" name="widget[{{ widget_row }}][main_cols][{{ main_col_count }}][sub_rows][{{ widget_sub_row }}][sub_cols][{{ sub_col_count }}][info][module][{{ position }}][code]" value="{{ module.code }}" />
+                                                                                                <input type="hidden" class="module-name" name="widget[{{ widget_row }}][main_cols][{{ main_col_count }}][sub_rows][{{ widget_sub_row }}][sub_cols][{{ sub_col_count }}][info][module][{{ position }}][name]" value="{{ module.name }}" />
+                                                                                                <input type="hidden" class="module-url"  name="widget[{{ widget_row }}][main_cols][{{ main_col_count }}][sub_rows][{{ widget_sub_row }}][sub_cols][{{ sub_col_count }}][info][module][{{ position }}][url]"  value="{{ module.url }}" />
+                                                                                            </div>
+                                                                                            {% set position = position + 1 %}
+                                                                                        {% endfor %}
+                                                                                    {% endfor %}
+                                                                                {% endif %}
+                                                                            </div>
+                                                                            <div class="col-action">
+                                                                                <div class="action-group">
+                                                                                    <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> {{ text_add_module }}</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <input type="hidden" class="sub-col-pos" value="{{ sub_col_count }}" />
+                                                                            <input type="hidden" class="sub-col-format" name="widget[{{ widget_row }}][main_cols][{{ main_col_count }}][sub_rows][{{ widget_sub_row }}][sub_cols][{{ sub_col_count }}][format]" value="{{ sub_col.format }}" />
+                                                                        </div>
+                                                                        {% set sub_col_count = sub_col_count + 1 %}
+                                                                    {% endfor %}
+                                                                </div>
+                                                                <input type="hidden" class="sub-row-pos" value="{{ widget_sub_row }}" />
+                                                            </div>
+                                                            {% set widget_sub_row = widget_sub_row + 1 %}
+                                                        {% endfor %}
+                                                    {% else %}
+                                                        <div class="sub-row sub-row-{{ widget_sub_row }}">
+                                                            <div class="sub-row-action">
+                                                                <div class="action-group">
+                                                                    <span class="row-identify">{{ text_columns }}</span>
+                                                                    <div class="sub-col-count">
+                                                                        <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>
+                                                                        <span class="count">1</span>
+                                                                        <a href="javascript:void(0);" onclick="builder.minusSubColumn($(this))" rel="1" class="col-minus"></a>
+                                                                    </div>
+                                                                    <div class="a-group">
+                                                                        <a class="a-column-custom" title="{{ text_custom_columns }}" onclick="builder.customSubColumns($(this))" href="javascript:void(0);"></a>
+                                                                        <a class="a-row-delete" onclick="builder.removeSubRow($(this))" href="javascript:void(0);"></a>
+                                                                    </div>
+                                                                </div>
+                                                                <input type="hidden" class="sub-cols-format" value="12" />
+                                                            </div>
+                                                            <div class="sub-row-content">
+                                                                <div class="col-sm-12 column-area">
+                                                                    <div class="module-area droparea ui-droppable ui-sortable sub-col-{{ sub_col_count }}">
+                                                                        <div class="text-insert-module"><span class="">{{ text_insert_module }}</span></div>
+                                                                    </div>
+                                                                    <div class="col-action">
+                                                                        <div class="action-group">
+                                                                            <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> {{ text_add_module }}</a>
+                                                                        </div>
+                                                                    </div>
+                                                                    <input type="hidden" class="sub-col-pos" value="{{ sub_col_count }}" />
+                                                                    <input type="hidden" class="sub-col-format" name="widget[0][main_cols][0][sub_rows][0][sub_cols][0][format]" value="12" />
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" class="sub-row-pos" value="{{ widget_sub_row }}" />
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                            {% set main_col_count = main_col_count + 1 %}
+                                        {% endfor %}
+                                    </div>
+                                    <input type="hidden" class="main-row-pos" value="{{ widget_row }}" />
+                                </div>
+                                {% set widget_row = widget_row + 1 %}
+                            {% endfor %}
+                        {% else %}
+                            {% set widget_row = 0 %}
+                            <div class="widget-row col-sm-12">
+                                <div class="row-action">
+                                    <div class="action-group">
+                                        <input type="text" class="form-control input-class-name" name="widget[0][class]" value="" placeholder="{{ text_custom_classname }}" />
+                                        <span class="row-identify">{{ text_columns }}</span>
+                                        <div class="col-count">
+                                            <a href="javascript:void(0);" onclick="builder.plusMainColumn($(this));" rel="1" class="col-plus"></a>
+                                            <span class="count">1</span>
+                                            <a href="javascript:void(0);" onclick="builder.minusMainColumn($(this));" rel="1" class="col-minus"></a>
+                                        </div>
+                                        <div class="a-group">
+                                            <a class="a-column-custom" title="{{ text_custom_columns }}" onclick="builder.customMainColumns($(this));" href="javascript:void(0);"></a>
+                                            <a class="a-row-delete" onclick="builder.removeRow($(this));" href="javascript:void(0);"></a>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" class="cols-format" value="12" />
+                                </div>
+                                <div class="row-content row-{{ widget_row }}">
+                                    {% set main_col_count = 0 %}
+                                    {% set sub_col_count = 0 %}
+                                    <div class="col-sm-12 main-column">
+                                        <input type="hidden" class="main-col-pos" value="{{ main_col_count }}" />
+                                        <input type="hidden" class="main-col-format" name="widget[0][main_cols][0][format]" value="12" />
+                                        <a class="a-sub-row-add" href="javascript:void(0);" onclick="builder.drawSubRow($(this))">{{ text_add_sub_row }}</a>
+                                        <div class="main-col-content main-col-{{ main_col_count }}">
+                                            {% set widget_sub_row = 0 %}
+                                            <div class="sub-row sub-row-{{ widget_sub_row }}">
+                                                <div class="sub-row-action">
+                                                    <div class="action-group">
+                                                        <span class="row-identify">{{ text_columns }}</span>
+                                                        <div class="sub-col-count">
+                                                            <a href="javascript:void(0);" onclick="builder.plusSubColumn($(this))" rel="1" class="col-plus"></a>
+                                                            <span class="count">1</span>
+                                                            <a href="javascript:void(0);" onclick="builder.minusSubColumn($(this))" rel="1" class="col-minus"></a>
+                                                        </div>
+                                                        <div class="a-group">
+                                                            <a class="a-column-custom" title="{{ text_custom_columns }}" onclick="builder.customSubColumns($(this))" href="javascript:void(0);"></a>
+                                                            <a class="a-row-delete" onclick="builder.removeSubRow($(this))" href="javascript:void(0);"></a>
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" class="sub-cols-format" value="12" />
+                                                </div>
+                                                <div class="sub-row-content">
+                                                    <div class="col-sm-12 column-area">
+                                                        <div class="module-area droparea ui-droppable ui-sortable sub-col-{{ sub_col_count }}">
+                                                            <div class="text-insert-module"><span class="">{{ text_insert_module }}</span></div>
+                                                        </div>
+                                                        <div class="col-action">
+                                                            <div class="action-group">
+                                                                <a class="a-module-add" onclick="builder.showAllModules($(this))" href="javascript:void(0);"><i class="fa fa-plus"></i> {{ text_add_module }}</a>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" class="sub-col-pos" value="{{ sub_col_count }}" />
+                                                        <input type="hidden" class="sub-col-format" name="widget[0][main_cols][0][sub_rows][0][sub_cols][0][format]" value="12" />
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" class="sub-row-pos" value="{{ widget_sub_row }}" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <input type="hidden" class="main-row-pos" value="{{ widget_row }}" />
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="widget-info-group col-sm-12">
+                        <button type="button" class="btn-insert btn">
+                            <i class="fa fa-plus"></i>
+                            <span>{{ text_add_row }}</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="all-modules-container row">
+            <div class="modules-container">
+                {% for extension in extensions %}
+                    {% if not extension.modules %}
+                        {% set extension_url = extension.url %}
+                        {% set extension_code = extension.code %}
+                        {% set extension_name = extension.name %}
+                        <div class="col-sm-4">
+                            <button type="button" onclick="builder.addModule('{{ extension_name }}', '{{ extension_code }}', '{{ extension_url }}')" class="btn-choose-module btn btn-default" value="{{ extension_code }}">
+                                <span>
+                                    {{ extension_name }}
+                                </span>
+                            </button>
+                        </div>
+                    {% else %}
+                        {% for module in extension.modules %}
+                            {% set module_url = module.url %}
+                            {% set module_code = module.code %}
+                            {% set module_name = module.name %}
+                            <div class="col-sm-4">
+                                <button type="button" onclick="builder.addModule('{{ module_name }}', '{{ module_code }}', '{{ module_url }}')" class="btn-choose-module btn btn-default" value="{{ module_code }}">
+                                    <span>
+                                        {{ module_name }}
+                                    </span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <input type="hidden" id="module-row" value="0" />
+            <input type="hidden" id="module-col" value="0" />
+            <input type="hidden" id="module-sub-row" value="0" />
+            <input type="hidden" id="module-sub-col" value="0" />
+            <div class="modules-btn-group">
+                <button type="button" class="btn-close btn-default pull-right" onclick="builder.closeAllModules();">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="text-columns" value="{{ text_columns }}" />
+<input type="hidden" id="text-insert-module" value="{{ text_insert_module }}" />
+<input type="hidden" id="text-add-module" value="{{ text_add_module }}" />
+<input type="hidden" id="text-custom-columns" value="{{ text_custom_columns }}" />
+<input type="hidden" id="text-custom-classname" value="{{ text_custom_classname }}" />
+<input type="hidden" id="text-number-min-over" value="{{ text_number_min_over }}" />
+<input type="hidden" id="text-number-max-over" value="{{ text_number_max_over }}" />
+<input type="hidden" id="text-columns-error-format" value="{{ text_columns_error_format }}" />
+
+<div class="popup-background"></div>
+    <div class="popup-loader-img">
+    </div>
+    <div class="popup-container">
+        <div class="popup-content">
+            <iframe src="" id="module-frame" scrolling="yes"></iframe>
+        </div>
+        <div class="popup-btn-group">
+            <button type="button" class="btn-close btn-default pull-right" onclick="closePopup();">Close</button>
+        </div>
+    </div>
+{{ footer }}
+
+<script type="text/javascript">
+    $('.btn-insert').click(function () {
+        var row_number = $('.widget-row:last .main-row-pos').val();
+        if(row_number == null) {
+            row_number = 0;
+        } else {
+            row_number++;
+        }
+        builder.drawMainRow(row_number);
+    });
+
+    var module_edit_frame = $('#module-frame');
+
+    function closePopup() {
+        $('.popup-background').hide();
+        $('.popup-loader-img').hide();
+        $('.popup-container').hide();
+        module_edit_frame.attr('src', "");
+    }
+
+    function loadModule(url) {
+        module_edit_frame.attr('src', url);
+        $('.popup-background').show();
+        $('.popup-loader-img').show();
+    }
+
+    module_edit_frame.on('load', function(event) {
+        var current_url = document.getElementById("module-frame").contentWindow.location.href;
+
+        if(module_edit_frame.attr('src') != "" && current_url.search('route=extension/module') > -1) {
+            module_edit_frame.contents().find('#header,#content .page-header .breadcrumb,#column-left,#footer').hide();
+            module_edit_frame.contents().find('#column-left + #content').css('margin', '0px');
+            module_edit_frame.contents().find('#content').css('padding', '20px 0 0');
+            $('.popup-container').show();
+        } else {
+            $('.popup-background').hide();
+            $('.popup-loader-img').hide();
+            $('.popup-container').hide();
+        }
+    });
+
+    $('.popup-background').on('click', function(){
+        closePopup();
+        builder.closeAllModules();
+    });
+</script>

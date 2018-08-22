@@ -1,0 +1,31 @@
+<h3>{{ heading_title }}</h3>
+
+<div class="row product-layout">
+
+ {% for seller in sellers %}
+
+ 
+  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+    <div class="product-thumb transition">
+
+      <div class="image"><a href="{{ seller.href }}"><img src="{{ seller.thumb }}" alt="{{ seller.name }}" title="{{ seller.name }}" class="img-responsive" /></a></div>
+
+      <div class="caption" style="min-height:80px;">
+
+        <h4><a href="{{ seller.href }}">{{ seller.name }}</a></h4>
+
+        
+
+        
+
+      </div>
+
+     
+    </div>
+
+  </div>
+{% endfor %} 
+
+</div>
+

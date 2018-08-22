@@ -1,0 +1,394 @@
+{{header}}{{column_left}}
+	{% set token_random = random() %}
+<div id="content">
+     <div class="page-header">
+        <div class="container-fluid">
+            <div class="pull-right">
+                <button type="submit" form="form-html" data-toggle="tooltip" title="{{button_save}}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+                <a href="{{cancel}}" data-toggle="tooltip" title="{{button_cancel}}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+            <h1>{{heading_title}}</h1>
+              <ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{breadcrumb.href}}">{{breadcrumb.text}}</a></li>
+				{% endfor %}
+			  </ul>
+        </div>
+    </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{error_warning}}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{text_edit}}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{action}}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+          
+		   <div class="form-group">
+				<label class="col-sm-2 control-label" for="input-name">{{entry_name}}</label>
+				<div class="col-sm-10">
+				  <input type="text" name="name" value="{{name}}" placeholder="{{entry_name}}" id="input-name" class="form-control" />
+				  {% if error_name %}
+				  <div class="text-danger">{{error_name}}</div>
+				  {% endif %}
+				</div>
+			  </div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label" for="input-effect">{{entry_effect}}</label>
+				<div class="col-sm-10">
+					<select name="effect" id="input-effect" class="form-control">
+						{% for effect1 in effect_option %}
+									<option  {% if  effect1['value'] | trim == effect | trim %}  selected ="selected"  {% endif %}  value="{% if  effect1['value'] %}  {{effect1['label']}}  {% endif %}">{% if  effect1['value'] %}  {{effect1['label']}}  {% endif %} </option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			
+			
+			<div class="form-group required">
+				<label class="col-sm-2 control-label" for="input-delay">{{entry_delay}}</label>
+				<div class="col-sm-10">
+					<input type="text" name="delay" value="{{delay}}" placeholder="{{entry_delay}}" id="input-delay" class="form-control" />
+					<?php if ($error_delay) { ?>
+					<div class="text-danger">{{error_delay}}</div>
+					<?php } ?>
+				</div>
+			</div>
+
+
+
+                 	<div class="form-group" >
+						<label class="col-sm-2 control-label" for="input-auto">{{entry_auto}}</label>
+						<div class="col-sm-10">
+						  <select name="auto" id="input-auto" class="form-control">
+							{% if auto %}
+							<option value="1" selected="selected">{{text_enabled}}</option>
+							<option value="0">{{text_disabled}}</option>
+							{% else %}
+							<option value="1">{{text_enabled}}</option>
+							<option value="0" selected="selected">{{text_disabled}}</option>
+							{% endif %}
+						  </select>
+						</div>
+					</div>
+
+                  	<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-hover">{{entry_hover}}</label>
+						<div class="col-sm-10">
+						  <select name="hover" id="input-hover" class="form-control">
+							{% if hover %}
+							<option value="1" selected="selected">{{text_enabled}}</option>
+							<option value="0">{{text_disabled}}</option>
+							{% else %}
+							<option value="1">{{text_enabled}}</option>
+							<option value="0" selected="selected">{{text_disabled}}</option>
+							{% endif %}
+						  </select>
+						</div>
+					  </div>
+					    
+					 <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-nextback">{{entry_nextback}}</label>
+						<div class="col-sm-10">
+						  <select name="nextback" id="input-nextback" class="form-control">
+							{% if nextback %}
+							<option value="1" selected="selected">{{text_enabled}}</option>
+							<option value="0">{{text_disabled}}</option>
+							{% else %}
+							<option value="1">{{text_enabled}}</option>
+							<option value="0" selected="selected">{{text_disabled}}</option>
+							{% endif %}
+						  </select>
+						</div>
+					  </div>
+						
+ 					 <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-contrl">{{entry_contrl}}</label>
+						<div class="col-sm-10">
+						  <select name="contrl" id="input-contrl" class="form-control">
+							{% if contrl %}
+							<option value="1" selected="selected">{{text_enabled}}</option>
+							<option value="0">{{text_disabled}}</option>
+							{% else %}
+							<option value="1">{{text_enabled}}</option>
+							<option value="0" selected="selected">{{text_disabled}}</option>
+							{% endif %}
+						  </select>
+						</div>
+					  </div>
+					  
+						
+					 <div class="form-group">
+						<label class="col-sm-2 control-label" for="input-status">{{entry_status}}</label>
+						<div class="col-sm-10">
+						  <select name="status" id="input-status" class="form-control">
+							{% if status %}
+							<option value="1" selected="selected">{{text_enabled}}</option>
+							<option value="0">{{text_disabled}}</option>
+							{% else %}
+							<option value="1">{{text_enabled}}</option>
+							<option value="0" selected="selected">{{text_disabled}}</option>
+							{% endif %}
+						  </select>
+						</div>
+					  </div>
+					    <div class="row">
+								<div class="col-sm-2">
+									<ul class="nav nav-pills nav-stacked" id="module">
+										{% set module_row = 0 %}
+										{% for ocslideshow_image in  ocslideshow_images %}
+										<li><a href="#tab-module{{ocslideshow_image['key']}}" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$('a[href=\'#tab-module{{ocslideshow_image['key']}}\']').parent().remove(); $('#tab-module{{ocslideshow_image['key']}}').remove(); $('#module a:first').tab('show');"></i> {{tab_banner}}  {{module_row}}</a></li>
+										{% set module_row = module_row +1 %}
+										{% endfor %}
+										<li id="module-add"><a onclick="addModule();"><i class="fa fa-plus-circle"></i> {{button_add_banner}}</a></li>
+									</ul>
+								</div>
+								<div class="col-sm-10">
+                            <div class="tab-content">
+							{% set  image_row = 0 %}
+                               {% for ocslideshow_image in  ocslideshow_images %}
+									 <div class="tab-pane" id="tab-module{{ocslideshow_image['key']}}">
+										<ul class="nav nav-tabs" id="language{{ocslideshow_image['key']}}">
+											{% for language in  languages %}
+											<li><a href="#tab-module{{ocslideshow_image['key']}}-language{{language['language_id']}}" data-toggle="tab"><img src="language/{{language['code']}}/{{language['code']}}.png" title="{{language['name']}}" /> {{language['name']}}</a></li>
+												{% endfor %}
+										</ul>
+								
+								   <div class="tab-content">
+										
+										{% for language in  languages %}
+                                        <div class="tab-pane" id="tab-module{{ocslideshow_image['key']}}-language{{language['language_id']}}">
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-title{{ocslideshow_image['key']}}-language{{language['language_id']}}">{{entry_title}}</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="text" id="input-title{{ocslideshow_image['key']}}-language{{language['language_id']}}" name="ocslideshow_image[{{image_row}}][ocslideshow_image_description][{{language['language_id']}}][title]" value="{% if ocslideshow_image['ocslideshow_image_description'][language['language_id']] %}{{ocslideshow_image['ocslideshow_image_description'][language['language_id']]['title']}}{% else %}{% endif %}" placeholder="{{entry_title}}" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-subtitle{{ocslideshow_image['key']}}-language{{language['language_id']}}">{{entry_subtitle}}</label>
+
+                                                <div class="col-sm-10">
+                                                    <input type="text" id="input-subtitle{{ocslideshow_image['key']}}-language{{language['language_id']}}" name="ocslideshow_image[{{image_row}}][ocslideshow_image_description][{{language['language_id']}}][sub_title]" value="{% if ocslideshow_image['ocslideshow_image_description'][language['language_id']] %}{{ocslideshow_image['ocslideshow_image_description'][language['language_id']]['sub_title']}}{% else %}{% endif %}" placeholder="{{entry_title}}" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label" for="input-description{{ocslideshow_image['key']}}-language{{language['language_id']}}">{{entry_description}}</label>
+                                                <div class="col-sm-10">
+                                                    <textarea data-toggle="summernote" data-lang="{{summernote}}" name="ocslideshow_image[{{image_row}}][ocslideshow_image_description][{{language['language_id']}}][description]" placeholder="{{entry_description}}" id="input-description{{ocslideshow_image['key']}}-language{{language['language_id']}}" class="form-control">{% if ocslideshow_image['ocslideshow_image_description'][language['language_id']] %}{{ocslideshow_image['ocslideshow_image_description'][language['language_id']]['description']}}{% else %}{% endif %}</textarea>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                       {% endfor %}
+									   
+									     <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-link{{ocslideshow_image['key']}}-language{{language['language_id']}}">{{entry_link}}</label>
+
+                                            <div class="col-sm-10">
+                                                <input type="text" id="input-link{{ocslideshow_image['key']}}-language{{language['language_id']}}" name="ocslideshow_image[{{image_row}}][link]" value="{% if  ocslideshow_image['link'] %}{{ocslideshow_image['link']}}{% endif %}" placeholder="{{entry_link}}" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="thumb-image-{{ocslideshow_image['key']}}-{{token_random}}">{{entry_image}}</label>
+                                            <div class="col-sm-10">
+                                                <a href="" id="thumb-image-{{ocslideshow_image['key']}}-{{token_random}}" data-toggle="image" class="img-thumbnail"><img src="{% if ocslideshow_image['thumb'] %} {{ocslideshow_image['thumb']}} {% else %}  {{placeholder}} {% endif %}" alt="" title="" data-placeholder="{{placeholder}}" /></a>
+                                                <input type="hidden"  name="ocslideshow_image[{{image_row}}][image]"  value="{{ocslideshow_image['image']}}" id="input-image{{ocslideshow_image['key']}}-{{token_random}}" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="display: none">
+                                            <label class="col-sm-2 control-label" for="thumb-image-{{ocslideshow_image['key']}}-{{token_random +1}}">{{entry_small_image}}</label>
+                                            <div class="col-sm-10">
+                                                <a href="" id="thumb-image-{{ocslideshow_image['key']}}-{{token_random +1}}" data-toggle="image" class="img-thumbnail"><img src="{% if ocslideshow_image['small_thumb'] %} {{ocslideshow_image['small_thumb']}} {% else %}  {{placeholder}} {% endif %}" alt="" title="" data-placeholder="{{placeholder}}" /></a>
+                                                <input type="hidden"  name="ocslideshow_image[{{image_row}}][small_image]"  value="{{ocslideshow_image['small_image']}}" id="input-image{{ocslideshow_image['key']}}-{{token_random +1}}" />
+                                            </div>
+                                        </div>
+										
+										
+										  <div class="form-group">
+                                            <label class="col-sm-2 control-label" for="input-type">{{entry_type}}</label>
+                                            <div class="col-sm-10">
+                                                <select name="ocslideshow_image[{{image_row}}][type]" id="input-type" class="form-control">
+                                                    {% if ocslideshow_image['type'] %}
+                                                    {% if ocslideshow_image['type'] == 1 %}
+                                                    <option selected="selected" value="1">Type 1</option>
+                                                    {% else %}
+													
+                                                    <option value="1">Type 1</option>
+                                                    {% endif %}
+                                                    {% if ocslideshow_image['type'] == 2 %}
+                                                    <option selected="selected" value="2">Type 2</option>
+                                                     {% else %}
+                                                    <option value="2">Type 2</option>
+                                                    {% endif %}
+                                                    {% if ocslideshow_image['type'] == 3 %}
+                                                    <option selected="selected" value="3">Type 3</option>
+                                                    {% else %}
+                                                    <option value="3">Type 3</option>
+                                                     {% endif %}
+                                                     {% else %}
+														<option value="1">Type 1</option>
+														<option value="2">Type 2</option>
+														<option value="3">Type 3</option>
+                                                     {% endif %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+									   	<div class="form-group">
+										<label class="col-sm-2 control-label">{{entry_store }}</label>
+										<div class="col-sm-10">
+											<div class="well well-sm" style="height: 150px; overflow: auto;"> 
+													{% for store in stores %}
+												<div class="checkbox">
+													<label>
+														<input type="checkbox" name="banner_store[]" value="{{store['store_id'] }}" {% if store['store_id'] in ocslideshow_image['banner_store'] %}  checked="checked" {% endif %}  />
+														{{store['name'] }}
+													</label>
+												</div>
+												{% endfor %}
+											</div>
+										</div>
+									</div>
+								   </div>
+								   </div>
+							   {%set image_row = image_row+1%}
+							   {% endfor %}
+							</div>
+						</div>
+						</div>
+					     	
+						
+		  
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+    <script type="text/javascript"><!--
+    var module_row = {{module_row}};
+
+    function addModule() {
+        var token = Math.random().toString(36).substr(2);
+
+        html  = '<div class="tab-pane" id="tab-module' + token + '">';
+        html += '  <ul class="nav nav-tabs" id="language' + token + '">';
+    	{% for language in  languages %}
+            html += '    <li><a href="#tab-module' + token + '-language{{language['language_id']}}" data-toggle="tab"><img src="language/{{language['code']}}/{{language['code']}}.png" title="{{language['name']}}" /> {{language['name']}}</a></li>';
+		{% endfor %}
+        html += '  </ul>';
+
+        html += '  <div class="tab-content">';
+
+
+    	{% for language in  languages %}
+            html += '    <div class="tab-pane" id="tab-module' + token + '-language{{language['language_id']}}">';
+
+            html += '      <div class="form-group">';
+            html += '        <label class="col-sm-2 control-label" for="input-title' + token + '-language{{language['language_id']}}">{{entry_title}}</label>';
+            html += '        <div class="col-sm-10"><input type ="text" name="ocslideshow_image[' + token + '][ocslideshow_image_description][{{language['language_id']}}][title]"placeholder="{{entry_title}}" class="form-control" id="input-title' + token + '-language{{language['language_id']}}"/></div>';
+            html += '      </div>';
+
+            html += '      <div class="form-group">';
+            html += '        <label class="col-sm-2 control-label" for="input-subtitle' + token + '-language{{language['language_id']}}">{{entry_subtitle}}</label>';
+            html += '        <div class="col-sm-10"><input class="form-control" type ="text" name="ocslideshow_image[' + token + '][ocslideshow_image_description][{{language['language_id']}}][sub_title]" placeholder="{{entry_subtitle}}" id="input-subtitle' + token + '-language{{language['language_id']}}"/></div>';
+            html += '      </div>';
+
+
+
+            html += '      <div class="form-group">';
+            html += '        <label class="col-sm-2 control-label" for="input-description' + token + '-language{{language['language_id']}}">{{entry_description}}</label>';
+            html += '        <div class="col-sm-10"><textarea class="form-control summernote" name="ocslideshow_image[' + token + '][ocslideshow_image_description][{{language['language_id']}}][description]" placeholder="{{entry_description}}" id="input-description' + token + '-language{{language['language_id']}}"></textarea></div>';
+            html += '      </div>';
+            html += '    </div>';
+        {% endfor %}
+
+        html += '      <div class="form-group">';
+        html += '        <label class="col-sm-2 control-label" for="input-link' + token + '-language{{language['language_id']}}">{{entry_link}}</label>';
+        html += '        <div class="col-sm-10"><input class="form-control" type="text" name="ocslideshow_image[' + token + '][link]" placeholder="{{entry_link}}" id="input-link' + token + '-language{{language['language_id']}}"/></div>';
+        html += '      </div>';
+
+        html += '      <div class="form-group">';
+        html += '        <label class="col-sm-2 control-label" for="input-image' + token + '-language{{language['language_id']}}">{{entry_image}}</label>';
+
+        html += '<div class="col-sm-10"><a href="" id="thumb-image' + token + '" data-toggle="image" class="img-thumbnail"><img src="{{placeholder}}" alt="" title="" data-placeholder="{{placeholder}}" /></a><input type="hidden" name="ocslideshow_image[' + token + '][image]" value="" id="input-image' + token + '" /></div>';
+        html += '      </div>';
+
+        html += '<div class="form-group" style="display: none;">';
+        html += '<label class="col-sm-2 control-label" for="input-image">'+'{{entry_small_image}}'+'</label>';
+
+        html += '<div class="col-sm-10">';
+        html += '<a href="" id="thumb-image-'+'{{token_random+1}}'+'" data-toggle="image" class="img-thumbnail"><img src="{{placeholder}}" alt="" title="" data-placeholder="{{placeholder}}" /></a>';
+        html += '<input type="hidden"  name="ocslideshow_image['+ token +'][small_image]"  value="" id="input-image'+'{{token_random+1}}'+'" />';
+
+        html += '</div>';
+        html += '</div>';
+
+        html +='  <div class="form-group">';
+        html+='<label class="col-sm-2 control-label" for="input-image">{{entry_type}}</label>';
+        html +='<div class="col-sm-10">';
+        html +='<select name="ocslideshow_image[' + token + '][type]" id="input-type" class="form-control">';
+        html +='<option value="1" >Type 1</option><option value="2">Type 2</option><option value="3">Type 3</option>';
+        html +='</select>'
+        html +='</div></div>'
+
+        html +='<div class="form-group">';
+        html +='<label class="col-sm-2 control-label">{{entry_store}}</label>';
+        html +='<div class="col-sm-10">'
+        html +='<div class="well well-sm" style="height: 150px; overflow: auto;">';
+		{% for store in stores %}
+		
+            html +='<div class="checkbox">';
+            html +='<label>';
+            html +='<input type="checkbox" name="ocslideshow_image[' + token + '][banner_store][]" value="{{store['store_id']}}"  />{{store['name']}} ';
+            html +='</label>';
+            html +='</div>';
+        {% endfor %}
+        html +='</div>';
+        html +='</div>';
+        html +='</div>';
+
+
+
+
+        html += '  </div>';
+        html += '</div>';
+
+        $('.tab-content:first-child').prepend(html);
+
+		{% for language in  languages %}
+            $('#input-description' + token + '-language{{language['language_id']}}').summernote({
+                height: 300
+            });
+        {% endfor %}
+
+        $('#module-add').before('<li><a href="#tab-module' + token + '" data-toggle="tab"><i class="fa fa-minus-circle" onclick="$(\'a[href=\\\'#tab-module' + token + '\\\']\').parent().remove(); $(\'#tab-module' + token + '\').remove(); $(\'#module a:first\').tab(\'show\');"></i> {{tab_banner}} ' + module_row + '</a></li>');
+
+        $('#module a[href=\'#tab-module' + token + '\']').tab('show');
+
+        $('#language' + token + ' li:first-child a').tab('show');
+
+        module_row++;
+    }
+    //--></script>
+    <script type="text/javascript"><!--
+    $('#module li:first-child a').tab('show');
+    	{% for ocslideshow_image in  ocslideshow_images %}
+        $('#language{{ocslideshow_image['key']}} li:first-child a').tab('show');
+    {% endfor %}
+    //--></script>
+<style type="text/css">
+    #module-add img {display:none!important;}
+</style>
+{{footer}}

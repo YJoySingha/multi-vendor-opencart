@@ -1,0 +1,349 @@
+/* This is CSS which belongs to Towerthemes. */
+/* Author : Hoang Van Tung */
+
+/* Module general */
+.tt-module .form-group {
+  position: relative;
+  text-align: left;
+  display: table;
+  background: #f1f1f1;
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #fff;
+  width:100%;
+  padding:0;
+  margin:0;
+}
+.tt-module .form-group .control-label {
+  font-size: 12px;
+  background-color: #e1e1e1;
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+  text-align: right;
+  color: #1d1d1b;
+  padding: 15px;
+  width:200px;
+  border-right: 1px solid #ccc;
+}
+.tt-module  .control-option {
+  padding:10px;
+}
+.tt-panel > .panel-heading {
+  background: #279CBB;
+}
+.tt-panel > .panel-heading h3 {
+  color: #fff;
+  text-shadow: 0 -1px 1px #006799, 1px 0 1px #006799, 0 1px 1px #006799, -1px 0 1px #006799;
+}
+.tt-panel .panel-body {
+  padding:0;
+}
+.tt-panel .tt-module {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+/********************** Params ***************************/
+
+.suffix {
+  padding: 6px 10px 6px 5px;
+  border: 1px solid #999;
+  border-left: 0;
+  margin-left: -4px;
+  background: #279CBB;
+  color: #f1f1f1;
+  border-radius: 0 5px 5px 0;
+}
+small {
+  font-weight: normal;
+    display: block;
+    font-style: italic;
+}
+.tt-number-field {
+  max-width: 50px;
+  padding: 6px 5px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  text-align: right;
+}
+
+/* Input param */
+.tt-field {
+  width: 100%;
+}
+.width-1 {
+  width: 100px;
+}
+.width-2 {
+  width: 200px;
+}
+.width-3 {
+  width: 300px;
+}
+.width-4 {
+  width: 400px;
+}
+.width-5 {
+  width: 500px;
+}
+
+/* Switch param */
+.switch {
+  position: relative;
+  height: 35px;
+  width: 163px;
+  background: #777;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+}
+.switch.switch-long {
+	width:243px;
+	height:38px;
+}
+.switch.switch-multi3 {
+	width: 363px;
+}
+.switch-label {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 80px;
+  line-height: 36px;
+  font-size: 12px;
+  text-transform: capitalize;
+  color: #f1f1f1;
+  text-align: center;
+  cursor: pointer;
+}
+.switch-long .switch-label{
+	width:120px;
+	height: 32px;
+	line-height:38px;
+}
+.switch-bol .switch-label {
+	text-transform: uppercase;
+}
+.switch-label:active {
+  font-weight: bold;
+}
+
+.switch-input {
+  opacity: 0 ;
+  position: absolute !important;
+}
+.switch-input:checked + .switch-label {
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: 0.15s ease-out;
+  -moz-transition: 0.15s ease-out;
+  -o-transition: 0.15s ease-out;
+  transition: 0.15s ease-out;
+}  
+.switch-input:checked + .switch-label-off ~ .switch-selection {
+  left: 80px;
+   background-image: -webkit-linear-gradient(top, #EC7F7F, #D77171);
+  background-image: -moz-linear-gradient(top, #EC7F7F, #D77171);
+  background-image: -o-linear-gradient(top, #EC7F7F, #D77171);
+  background-image: linear-gradient(to bottom, #EC7F7F, #D77171);
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+.switch-long .switch-input:checked + .switch-label-off ~ .switch-selection {
+  left: 120px;
+  background-image: -webkit-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -moz-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -o-linear-gradient(top, #279CBB, #279CBB);
+  background-image: linear-gradient(to bottom, #279CBB, #279CBB);
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+.switch-multi3.switch-long  .switch-input:checked + .switch-label-2 ~ .switch-selection {
+  left: 120px;
+  background-image: -webkit-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -moz-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -o-linear-gradient(top, #279CBB, #279CBB);
+  background-image: linear-gradient(to bottom, #279CBB, #279CBB);
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+.switch-multi3.switch-long .switch-input:checked + .switch-label-3 ~ .switch-selection {
+  left: 240px;
+  background-image: -webkit-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -moz-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -o-linear-gradient(top, #279CBB, #279CBB);
+  background-image: linear-gradient(to bottom, #279CBB, #279CBB);
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+.switch-input:checked + .switch-label-on ~ .switch-selection {
+  left: 3px;
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+
+.switch-multi3 .switch-input:checked + .switch-label-2 ~ .switch-selection {
+  left: 120px;
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+.switch-multi3 .switch-input:checked + .switch-label-on ~ .switch-selection {
+  left: 240px;
+  /* Note: left: 50% doesn't transition in WebKit */
+}
+.switch-selection {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 3px;
+  left: 3px;
+  width: 80px;
+  height: 29px;
+  background: #279CBB;
+  border-radius: 3px;
+  background-image: -webkit-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -moz-linear-gradient(top, #279CBB, #279CBB);
+  background-image: -o-linear-gradient(top, #279CBB, #279CBB);
+  background-image: linear-gradient(to bottom, #279CBB, #279CBB);
+  -webkit-box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.5), 0 0 2px rgba(0, 0, 0, 0.2);
+  -webkit-transition: left 0.15s ease-out;
+  -moz-transition: left 0.15s ease-out;
+  -o-transition: left 0.15s ease-out;
+  transition: left 0.15s ease-out;
+}
+.switch-long .switch-selection {
+	width:120px;
+	height:32px;
+}
+
+
+/*-------------------------------*/
+.input-cate_name ~ .fa.fa-times, #input-cate_name ~ .fa.fa-times{
+	position: absolute;
+    top: 13px;
+    left: 457px;
+    width: 30px;
+    height: 30px;
+    z-index: 9999;
+    line-height: 30px;
+    font-size: 17px;
+    padding-left: 8px;
+    background: #777;
+    color: #EC7F7F;
+    cursor: pointer;
+}
+#input-cate_name ~ .fa.fa-times:hover {
+	color: #fd4343;
+	background: #333;
+}
+.tt-product {
+	border-bottom: 1px solid #ddd;
+	padding: 5px 0;
+}
+.tt-product:last-child {
+	border: none;
+}
+.tt-product .fa.fa-times{
+	width: 20px;
+    height: 20px;
+    background: #777;
+    color: #EC7F7F;
+    font-size: 15px;
+    padding: 3px 0 0 4px;
+	float: right;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.tt-product .fa.fa-times:hover {
+	color: #fd4343;
+	background: #333;
+}
+.tt-product img{
+	margin-right:10px;
+}
+.language-label{
+	display: block;
+  background: #279CBB;
+  color: #fff;
+	margin-bottom: 3px;
+	font-size: 13px;
+	width: 250px;
+}
+.language-label:hover {
+  background: #21819a;
+	color: #fff;
+}
+.language-label:focus{
+  color: #fff;
+}
+.language-label img {
+	display: inline-block;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+.language-label span {
+	padding: 10px;
+    display: inline-block;
+}
+.language-label i {
+	padding: 11px;
+	font-size: 16px;
+	font-weight: bold;
+	float: right;
+}
+
+/* Tab products module */
+.tab-heading {
+    color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+    border-bottom: 2px solid #f1f1f1;
+    background: #279CBB;
+}
+.tab-heading:after {
+  font-family: 'FontAwesome';
+  content: "\f107";
+  margin-left: 20px;
+  font-size: 16px;
+}
+.tab-heading:hover{
+  cursor: pointer;
+  background: #1b6e84;
+}
+.tab-heading .delete_tab {
+  float: right;
+  font-size: 14px;
+}
+.tab-heading .delete_tab:hover {
+  cursor: pointer;
+  color: #8a1717;
+}
+.tab-heading .delete_tab i {
+  padding-right: 7px;
+}
+.button-addnew {
+  margin: 10px 0 0 10px;
+  padding: 5px;
+}
+
+
+/* Themeoptions module */
+.oc_themeoptions > .nav-tabs {
+  float: left;
+  width: 220px;
+  background: #279CBB;
+}
+
+.oc_themeoptions > .nav-tabs > li {
+  width: 100%;
+  border-bottom: 1px solid #187079;
+  border-top: 1px solid #748f92;
+  margin:0;
+}
+.oc_themeoptions > .nav-tabs > li > a{
+  border: none;
+  color: #f1f1f1;
+}
+.oc_themeoptions > .nav-tabs > li.active a, .oc_themeoptions > .nav-tabs > li:hover a, .oc_themeoptions > .nav-tabs > li a:focus{
+  background: #1b6679;
+  border: none;
+  color: #f1f1f1;
+}
+.oc_themeoptions > .tab-content {
+  margin-left: 225px;
+}

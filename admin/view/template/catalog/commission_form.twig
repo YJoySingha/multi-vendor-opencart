@@ -1,0 +1,145 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-review" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+     {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ heading_title }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-review" class="form-horizontal">
+		
+		 <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+			
+			
+			<li><a href="#tab-plan" data-toggle="tab">{{ tab_plan }}</a></li>
+			
+          </ul>
+		  
+		   <div class="tab-content">
+		   
+		  
+	         <div id="tab-plan"  class="tab-pane">
+		  
+				  <div class="form-group">
+					<label class="col-sm-2 control-label" for="input-author">{{ entry_amount }}</label>
+					<div class="col-sm-10">
+					  <input type="text" name="amount" value="{{ amount }}" placeholder="{{ entry_amount }}" 
+					  id="input-author" class="form-control" />
+					 
+					</div>
+				  </div>
+				  
+				  <div class="form-group">
+					<label class="col-sm-2 control-label" for="input-author">{{ entry_duration }}</label>
+					<div class="col-sm-10">
+					  per<input type="text" name="per" value="{{ per }}" placeholder="per" 
+					  id="input-author" />
+						<select name="duration_id" >
+						 {% for duration in durations %}
+						{% if duration.duration_id == duration_id %}
+						<option value="{{ duration.duration_id}}" selected="selected">{{ duration.duration_name }}</option>
+						{% else %}
+						<option value="{{ duration.duration_id}}">{{ duration.duration_name }}</option>
+						{% endif %}
+						  {% endfor %}
+						</select>
+					</div>
+				  </div>
+				
+		  
+		  </div>
+		  
+		  
+		  
+            <div class="tab-pane active" id="tab-general">
+		  
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-author">{{ entry_name }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="commission_name" value="{{ commission_name }}" placeholder="{{ entry_name }}" 
+			  id="input-author" class="form-control" />
+              {% if  error_commission_name %}
+              <div class="text-danger">{{ error_commission_name }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-product">Default Commission rate:</label>
+            <div class="col-sm-10">
+			
+			<input name="commission" value="{{ commission }}" size="25" class="form-control"/>
+            {% if  error_commission %}
+            <div class="text-danger">{{ error_commission }}</div>
+            {% endif %}
+			
+			
+            
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-text">{{ entry_product_limit }}</label>
+            <div class="col-sm-10">
+              <input name="product_limit" value="{{ product_limit }}" size="25" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-name">{{ entry_sort_order }}</label>
+            <div class="col-sm-10">
+             <input name="sort_order" value="{{ sort_order }}" size="1" class="form-control"/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_commission }}</label>
+          
+          </div>
+
+	      {% for catcommission in categories %}
+         	  <div class="form-group">
+		   <label class="col-sm-2 control-label" for="input-name">{{ catcommission.name }}</label>
+                 <div class="col-sm-10">
+             <input name="commission_rate[{{ catcommission.category_id }}]" 
+	     value="{{ commission_rate[catcommission.category_id] ? commission_rate[catcommission.category_id] }}" size="2" />%
+		
+		 
+            </div>
+			
+          </div>
+		  {% endfor %}
+		  
+		  </div>
+		  
+		  
+		
+		  
+		  
+		  </div>
+        </form>
+		  <script type="text/javascript"><!--
+
+$('#description').summernote({height: 300});
+
+//--></script>
+      </div>
+    </div>
+  </div>
+ </div>
+{{ footer }}

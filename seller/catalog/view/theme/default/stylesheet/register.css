@@ -1,0 +1,9 @@
+.background { background: #00aadc none repeat scroll 0 0;    border-color: #0087be;    border-radius: 4px;    border-style: solid;    border-width: 1px 1px 2px;    box-sizing: border-box;    clear: both;    color: white;    cursor: pointer;    display: block;    float: none;    font-size: 14px;    font-weight: 600;    height: auto;    line-height: 1.3;       overflow: hidden;    padding: 10px 16px;    width: 100%;}
+.loginh1 {    background-color: #1e8cbe;    border-bottom: 1px solid #0079aa;    height: 46px;    left: 0;    position: relative;    right: 0;    text-align: left;    margin-top: 0;	padding-top:5px;}
+. label {    color: #2e4453;    font-size: 14px;    font-weight: 600;    line-height: 24px;    margin-bottom: 5px;}
+.register{border-bottom: 1px solid rgba(200, 215, 225, 0.5);    color: #87a6bc;    display: block;    padding: 16px 24px;	width:100px;font-size: 13px;}	
+.footer {    background: #f6f9fa none repeat scroll 0 0;    border-top: 1px solid #e9eff3;    box-shadow: none; padding:24px;width:580px;	}		#login {margin: auto;    padding: 8% 0 0;    width: 320px;}
+#login1 {margin: auto;
+    padding: 15px 0 0;
+	 font-size: 15px;
+    width: 320px;}

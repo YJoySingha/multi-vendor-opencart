@@ -1,0 +1,162 @@
+<?php
+// Heading
+$_['heading_title']          = 'My Categories';
+$_['heading_title1']     	 = 'Add Category';
+// Text
+$_['text_success']           = 'Success: You have modified categories!';
+$_['text_default']           = 'Default';
+$_['text_image_manager']     = 'Image Manager';
+$_['text_browse']            = 'Browse Files';
+$_['text_clear']             = 'Clear Image';
+// Column
+$_['column_name']            = 'Category Name';
+$_['column_sort_order']      = 'Sort Order';
+$_['column_action']          = 'Action';
+// Entry
+$_['entry_name']             = 'Category Name';
+$_['entry_description']      = 'Description';
+$_['entry_meta_title'] 	     = 'Meta Tag Title';
+$_['entry_meta_keyword'] 	 = 'Meta Tag Keywords';
+$_['entry_meta_description'] = 'Meta Tag Description';
+$_['entry_keyword']          = 'SEO Keyword';
+$_['entry_parent']           = 'Parent';
+$_['entry_filter']           = 'Filters';
+$_['entry_store']            = 'Stores';
+$_['entry_image']            = 'Image';
+$_['entry_top']              = 'Top';
+$_['entry_column']           = 'Columns';
+$_['entry_sort_order']       = 'Sort Order';
+$_['entry_status']           = 'Status';
+$_['entry_layout']           = 'Layout Override';
+// Error
+$_['error_warning']          = 'Warning: Please check the form carefully for errors!';
+$_['error_permission']       = 'Warning: You do not have permission to modify categories!';
+$_['error_name']             = 'Category Name must be between 2 and 32 characters!';
+$_['error_meta_title']       = 'Meta Title must be greater than 3 and less than 255 characters!';
+// Button
+$_['button_insert']           = 'Add';
+$_['button_delete']           = 'Delete';
+$_['button_save']             = 'Save';
+$_['button_cancel']           = 'Cancel';
+$_['button_clear']            = 'Clear Log';
+$_['button_close']            = 'Close';
+$_['button_filter']           = 'Filter';
+$_['button_send']             = 'Send';
+$_['button_edit']             = 'Edit';
+$_['button_copy']             = 'Copy';
+$_['button_back']             = 'Back';
+$_['button_remove']           = 'Remove';
+$_['button_backup']           = 'Backup';
+$_['button_restore']          = 'Restore';
+$_['button_upload']           = 'Upload';
+$_['button_submit']           = 'Submit';
+$_['button_invoice']          = 'Print Invoice';
+$_['button_add_address']      = 'Add Address';
+$_['button_add_attribute']    = 'Add Attribute';
+$_['button_add_banner']       = 'Add Banner';
+$_['button_add_product']      = 'Add Product';
+$_['button_add_voucher']      = 'Add Voucher';
+$_['button_add_option']       = 'Add Option';
+$_['button_add_option_value'] = 'Add Option Value';
+$_['button_add_discount']     = 'Add Discount';
+$_['button_add_special']      = 'Add Special';
+$_['button_add_image']        = 'Add Image';
+$_['button_add_geo_zone']     = 'Add Geo Zone';
+$_['button_add_history']      = 'Add History';
+$_['button_add_transaction']  = 'Add Transaction';
+$_['button_add_total']        = 'Add Total';
+$_['button_add_reward']       = 'Add Reward Points';
+$_['button_add_route']        = 'Add Route';
+$_['button_add_rule' ]        = 'Add Rule';
+$_['button_add_module']       = 'Add Module';
+$_['button_add_link']         = 'Add Link';
+$_['button_update_total']     = 'Update Totals';
+$_['button_approve']          = 'Approve';
+$_['button_reset']            = 'Reset';
+// Text
+$_['text_yes']                = 'Yes';
+$_['text_no']                 = 'No';
+$_['text_enabled']            = 'Enabled';
+$_['text_disabled']           = 'Disabled';
+$_['text_none']               = ' --- None --- ';
+$_['text_select']             = ' --- Please Select --- ';
+$_['text_select_all']         = 'Select All';
+$_['text_unselect_all']       = 'Unselect All';
+$_['text_all_zones']          = 'All Zones';
+$_['text_default']            = ' <b>(Default)</b>';
+$_['text_close']              = 'Close';
+$_['text_no_results']         = 'No results!';
+$_['text_separator']          = ' &gt; ';
+$_['text_edit']               = 'Edit';
+$_['text_view']               = 'View';
+$_['text_home']               = 'Home';
+// Tab
+$_['tab_address']             = 'Address';
+$_['tab_admin']               = 'Admin';
+$_['tab_attribute']           = 'Attribute';
+$_['tab_coupon_history']      = 'Coupon History';
+$_['tab_customer']            = 'Customer Details';
+$_['tab_data']                = 'Data';
+$_['tab_design']              = 'Design';
+$_['tab_discount']            = 'Discount';
+$_['tab_general']             = 'General';
+$_['tab_fraud']               = 'Fraud';
+$_['tab_ip']                  = 'IP Addresses';
+$_['tab_links']               = 'Links';
+$_['tab_image']               = 'Image';
+$_['tab_option']              = 'Option';
+$_['tab_server']              = 'Server';
+$_['tab_store']               = 'Store';
+$_['tab_special']             = 'Special';
+$_['tab_local']               = 'Local';
+$_['tab_mail']                = 'Mail';
+$_['tab_module']              = 'Module';
+$_['tab_order']               = 'Order Details';
+$_['tab_order_history']       = 'Order History';
+$_['tab_payment']             = 'Payment Details';
+$_['tab_product']             = 'Products';
+$_['tab_return']              = 'Return Details';
+$_['tab_return_history']      = 'Return History';
+$_['tab_reward']              = 'Reward Points';
+$_['tab_shipping']            = 'Shipping Details';
+$_['tab_total']               = 'Totals';
+$_['tab_transaction']         = 'Transactions';
+$_['tab_voucher']             = 'Vouchers';
+$_['tab_voucher_history']     = 'Voucher History';
+/**code added here**/
+// Button
+$_['button_insert']           = 'Add';
+$_['button_delete']           = 'Delete';
+$_['button_filter']           = 'Filter';
+$_['button_save']             = 'Save';
+$_['button_edit']             = 'Edit';
+$_['button_copy']             = 'Copy';
+$_['button_back']             = 'Back';
+$_['button_cancel']           = 'Cancel';
+$_['button_remove']           = 'Remove';
+$_['button_backup']           = 'Backup';
+$_['button_upload']           = 'Upload';
+$_['button_submit']           = 'Submit';
+$_['button_add_discount']     = 'Add Discount';
+$_['button_add_special']      = 'Add Special';
+$_['button_add_image']        = 'Add Image';
+$_['button_reset']            = 'Reset';
+$_['button_add_option_value']            = 'Add Option value';
+$_['text_edit']         = 'Edit';
+$_['text_no_results']         = 'No Result Found';
+$_['text_success']      = 'Thank you for posting your category.Your Category has been sent to admin for approval';
+$_['text_modify']      = 'You have successfully modified category!';
+// Help
+$_['help_filter']            = '(Autocomplete)';
+$_['help_keyword']           = 'Do not use spaces, instead replace spaces with - and make sure the keyword is globally unique.';
+$_['help_top']               = 'Display in the top menu bar. Only works for the top parent categories.';
+$_['help_column']            = 'Number of columns to use for the bottom 3 categories. Only works for the top parent categories.';
+//mail
+$_['text_subject']  = '%s - New category awaiting for approval';
+$_['text_welcome']  = 'New category posted at %s!';
+$_['text_login']    = 'Your account has now been created and you can log in by using your email address and password by visiting our website or at the following URL:';
+$_['text_approval'] = 'New category awaiting for approval.Login into admin and check category for approval';
+$_['text_services'] = 'Upon logging in, you will be able to access other services including reviewing past orders, printing invoices and editing your account information.';
+$_['text_thanks']   = 'Thanks,';
+/*end*/
+?>

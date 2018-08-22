@@ -1,0 +1,94 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <h1>{{ heading_title }}</h1>
+	  
+	  <div class="pull-right">
+   
+        <a data-toggle="tooltip" title="Confirm" class="btn btn-primary" 
+	onclick="confirm('Are you sure you wants to confirm payment?') ? $('#form').submit() : false;"><i class="fa fa-save">
+		</i></a>
+		 <a href="{{ cancel }}" data-toggle="tooltip" title="Cancel" class="btn btn-default"><i class="fa fa-reply"></i></a>
+		
+		</div>
+    
+	
+       
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-bar-chart"></i> {{ heading_title }}</h3>
+      </div>
+      
+        <div class="table-responsive">
+		<form method="post" enctype="multipart/form-data" action="{{ insert }}" id="form">
+          <table class="table table-bordered">
+		  
+		  <tr>
+		<td class="text-left" colspan="2">
+		Bank Details of 
+
+
+		
+		{% if business_name %}
+
+		{{ business_name }}
+
+		{% else %}
+
+		{{ name }}
+
+		{% endif %}
+		
+		<br/>
+		Payee Name: {{ account_name }}<br/>
+		Bank Name: {{ bank_name }}<br/>
+		Account Number: {{ account_number }}<br/>
+		Branch: {{ branch }}<br/>
+		IFSC CODE: {{ ifsccode }}<br/>
+		Telephone: {{ telephone }}<br/>
+		</td>
+          </tr>
+          <tr>
+		<td class="text-left">Note:</td>
+		<td><textarea name="description" cols="40" rows="5"></textarea>
+		
+		{% if error_description %}
+                  <div class="text-danger">{{ error_description }}</div>
+               {% endif %}
+		</td>
+		<input type="hidden" name="seller_id" value="{{ seller_id }}" />
+		<input type="hidden" name="seller_transaction_ids" value="{{ seller_transaction_ids }}" />
+		</td>
+		<tr>
+		<td class="text-left">Amount to pay:</td>
+		<td>
+		<input type="text" name="seller_amount" value="{{ seller_amount }}" />
+		
+		{% if error_seller_amount %}
+                  <div class="text-danger">{{ error_seller_amount }}</div>
+                {% endif %}
+		</td>
+		
+		
+          </tr>
+		  
+         </table>
+		 </form>
+        </div>
+       
+
+  <script type="text/javascript"><!--
+
+$('#description').summernote({height: 300});
+
+//--></script>
+      </div>
+    </div>
+  </div>
+  
+ </div>
+{{ footer }}

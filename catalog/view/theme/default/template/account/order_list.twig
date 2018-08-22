@@ -1,0 +1,82 @@
+{{ header }}
+<div id="account-order" class="container">
+  <ul class="breadcrumb">
+    {% for breadcrumb in breadcrumbs %}
+    <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+    {% endfor %}
+  </ul>
+        {% if success %}
+      <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}</div>
+          {% endif %}
+          {% if error_warning %}
+        <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+          {% endif %}
+  <div class="row">{{ column_left }}
+    {% if column_left and column_right %}
+    {% set class = 'col-sm-6' %}
+    {% elseif column_left or column_right %}
+    {% set class = 'col-sm-9' %}
+    {% else %}
+    {% set class = 'col-sm-12' %}
+    {% endif %}
+    <div id="content" class="{{ class }}">{{ content_top }}
+      <h1>{{ heading_title }}</h1>
+      {% if orders %}
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <td class="text-right">{{ column_order_id }}</td>
+              <td class="text-left">{{ column_customer }}</td>
+              <td class="text-right">{{ column_product }}</td>
+              <td class="text-left">{{ column_status }}</td>
+              <td class="text-right">{{ column_total }}</td>
+              <td class="text-left">{{ column_date_added }}</td>
+              <td></td>
+            </tr>
+          </thead>
+          <tbody>
+           {% for order in orders %}
+            <tr>
+              <td class="text-right">#{{ order.order_id }}</td>
+              <td class="text-left">{{ order.name }}</td>
+              <td class="text-right">{{ order.products }}</td>
+              <td class="text-left">{{ order.status }}</td>
+              <td class="text-right">{{ order.total }}</td>
+              <td class="text-right">
+              <div style="height:10px;clear:both;">&nbsp;</div>
+              {% for sellerproduct in order.sellers %}
+                <div><b>{{ text_seller }}</b> {{ sellerproduct.username}}</div>
+                 <div><b>{{ text_products }}</b> {{ sellerproduct.numprod }}</div>
+                 <div><b>{{ text_status }}</b> {{ sellerproduct.name }}</div>
+                 <div>
+                 {% if sellerproduct.reviews %}
+                  {% else %}
+                 <a href="index.php?route=account/review&order_id={{ order.order_id }}&seller_id={{ sellerproduct.seller_id }}" 
+                 class="btn btn-primary">{{ text_rate }}</a>
+                 {% endif %}
+                 </div>
+               {% endfor %}
+              </td>
+              <td class="text-left">{{ order.date_added }}</td>
+              <td class="text-right">{{ text_review }}</td>
+              <td class="text-right"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <div class="col-sm-6 text-left">{{ pagination }}</div>
+        <div class="col-sm-6 text-right">{{ results }}</div>
+      </div>
+      {% else %}
+      <p>{{ text_empty }}</p>
+      {% endif %}
+      <div class="buttons clearfix">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{{ footer }}
