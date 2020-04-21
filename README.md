@@ -88,3 +88,10 @@ GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ 
+ Check this while installing --
+ 
+ You nay face this issue like --
+ 
+ permission denied, make 777 to the specific folder and their after you may get unwrittable issue in admin/config, seller/config and in main config just make 777 and you get install.
+ 
